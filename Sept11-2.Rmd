@@ -62,16 +62,16 @@ Pacf(Sept11Air.ts.season$residuals, lag.max = 12, main="")
 Sept11Air.ts <- ts(Sept11.data$Air.RPM..000s., 
                 start = c(1990, 1), end = c(2004, 3), freq = 12)
 nValid <-32
-nTrain <- length(sept11.ts) - nValid
+nTrain <- length(Sept11Air.ts) - nValid
 
 Pre911Air.ts <- window(Sept11Air.ts, start = c(1991, 1), end = c(2001,8))
-Post911Air.ts <- window(airdata.ts, start = c(1991, nTrain + 1),
+Post911Air.ts <- window(Sept11Air.ts, start = c(1991, nTrain + 1),
                         end = c(1991, nTrain + nValid))
 
 naive.pred <- forecast::naive(Pre911Air.ts, h = nValid)
 snaive.pred <- forecast::snaive(Pre911Air.ts, h = nValid)
 
-plot(sept11.ts,  ylab = "Air Travel", xlab = "Year", bty = "l", 
+plot(Sept11Air.ts,  ylab = "Air Travel", xlab = "Year", bty = "l", 
      xaxt = "n", main = "") 
 axis(1, at = seq(1990, 2004, 4), labels = format(seq(1990, 2004, 4)))
 lines(naive.pred$mean, lwd = 2, col = "blue", lty = 1)
@@ -97,7 +97,7 @@ Post911Rail.ts <- window(Sept11Rail.ts, start = c(1991, nTrain + 1),
 naive.pred <- forecast::naive(Pre911Rail.ts, h = nValid)
 snaive.pred <- forecast::snaive(Pre911Rail.ts, h = nValid)
 
-plot(sept11T.ts,  ylab = "Rail Travel", xlab = "Year", bty = "l", 
+plot(Sept11Rail.ts,  ylab = "Rail Travel", xlab = "Year", bty = "l", 
      xaxt = "n", main = "") 
 axis(1, at = seq(1990, 2004, 4), labels = format(seq(1990, 2004, 4)))
 lines(naive.pred$mean, lwd = 2, col = "blue", lty = 1)
@@ -123,7 +123,7 @@ Post911Car.ts <- window(Sept11Car.ts, start = c(1991, nTrain + 1),
 naive.pred <- forecast::naive(Pre911Car.ts, h = nValid)
 snaive.pred <- forecast::snaive(Pre911Car.ts, h = nValid)
 
-plot(sept11c.ts,  ylab = "Car Travel", xlab = "Year", bty = "l", 
+plot(Sept11Car.ts,  ylab = "Car Travel", xlab = "Year", bty = "l", 
      xaxt = "n", main = "") 
 axis(1, at = seq(1990, 2004, 4), labels = format(seq(1990, 2004, 4)))
 lines(naive.pred$mean, lwd = 2, col = "blue", lty = 1)
